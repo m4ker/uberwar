@@ -15,5 +15,7 @@
 Route::get('/', function(){
 	return view('index');
 });
-// 创建活动
-Route::get('/user', 'UserController@index');
+
+Route::get('/api/a', 'ApiController@a');
+
+Route::post('/api/b', 'ApiController@b');
