@@ -75,4 +75,4 @@ uberwar是一款基于Uber行程和真实世界地理位置的塔防游戏, 当u
 1. 我们将源代码托管在github上, 并且用github的wiki进行协作
 2. IOS客户端
 3. web版客户端, html+js
-4. 服务端, 由golang实现, 负责调用uber api并且给客户端/前端提供数据, 我们服务端的同学还顺便开发了uber的go语言sdk, 我觉得这个sdk可以提供给其他开发者使用.
+4. 服务端, 由golang实现, 负责调用uber api并且给客户端/前端提供数据, 我们服务端的同学还顺便开发了uber的go语言sdk.
