@@ -115,7 +115,7 @@
             right:0;
             z-index: 100;
             width:50px;
-            height:100px;
+            height:120px;
             font-size:2em;
             /*background:orange;*/
         }
@@ -123,10 +123,22 @@
             display:block;
             width:50px;
             height:50px;
+            background-color: white;
+            opacity: 0.5;
+            margin-bottom:20px;
         }
         #action a.active {
+            opacity: 1;
+            /*
             color:red;
             font-weight:bold;
+            */
+        }
+        #build {
+            background-image: url('/html/tower_50x50.png');
+        }
+        #destory {
+            background-image: url('/html/bomb_50x50.png');
         }
         #me {
             background: blue;
@@ -178,8 +190,8 @@
     <div id="me"></div>
     <div id="msg"></div>
     <div id="action">
-        <a href="javascript:void(0);" id="build">建</a>
-        <a href="javascript:void(0);" id="destory">炸</a>
+        <a href="javascript:void(0);" id="build"></a>
+        <a href="javascript:void(0);" id="destory"></a>
     </div>
 </div>
 <script>
@@ -382,19 +394,19 @@
             console.log(+e.lnglat.getLng()+','+e.lnglat.getLat());
             if (mode == 'build' && profile.mp > 0) {
                 /*
-                $.ajax({
-                    url:'/',
-                    method:'get',
-                    success:function(){
-                */
+                 $.ajax({
+                 url:'/',
+                 method:'get',
+                 success:function(){
+                 */
                 build_tower(e.lnglat.getLng(), e.lnglat.getLat(), profile.faction);
                 data.body.mana--; // test
                 data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 防御塔部署成功')
                 profile.score++;
                 /*
-                    }
-                });
-                */
+                 }
+                 });
+                 */
             }
         });
 
@@ -418,43 +430,43 @@
         map.panBy(0, 5);
         update (0, 0);
         /*
-        // 这里是生产环境的定位, 但是由于展示的时候是静止不动的, 所以要换成数据模拟
-        map.plugin('AMap.Geolocation', function() {
-            geolocation = new AMap.Geolocation({
-                enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-                zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-                buttonPosition:'RB'
-            });
-            geolocation.getCurrentPosition();
-            AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
-            AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
-        });
-        //解析定位结果
-        function onComplete(data) {
-            map.panTo(data.position);
-            update (data.position.getLat(), data.position.getLng());
-        }
-        //解析定位错误信息
-        function onError(data) {
-        }
-        */
+         // 生产环境的定位, 但是由于展示的时候是静止不动的, 所以要换成数据模拟
+         map.plugin('AMap.Geolocation', function() {
+         geolocation = new AMap.Geolocation({
+         enableHighAccuracy: true,//是否使用高精度定位，默认:true
+         timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+         buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+         zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+         buttonPosition:'RB'
+         });
+         geolocation.getCurrentPosition();
+         AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+         AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+         });
+         //解析定位结果
+         function onComplete(data) {
+         map.panTo(data.position);
+         update (data.position.getLat(), data.position.getLng());
+         }
+         //解析定位错误信息
+         function onError(data) {
+         }
+         */
     }
 
     function build_tower(lat,lng,faction,id) {
         /*
-        // 生产环境代码
-        $.ajax({
-            url: '/build?sid=' + sid + '&lat=' + lat + '&lng=' + lng,
-            method: 'get',
-            success: function (data) {
-            }
-        });
-        */
+         // 生产环境代码
+         $.ajax({
+         url: '/build?sid=' + sid + '&lat=' + lat + '&lng=' + lng,
+         method: 'get',
+         success: function (data) {
+         }
+         });
+         */
         var marker = new AMap.Marker({
             //icon: "/tower.png",
-            icon: faction == profile.faction ? 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png' : 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png',
+            icon: faction == profile.faction ? '/html/tower_blue_30x30.png' : '/html/tower_red_30x30.png',
             position: [lat, lng]
         });
         marker.setMap(map);
@@ -464,21 +476,22 @@
         AMap.event.addListener(marker, 'click', function(e){
             if (mode == 'destory' && profile.mp > 0 && profile.faction != marker.faction) {
                 /*
-                // 生产环境代码
-                $.ajax({
-                    url:'/destory?sid=' + sid +'&lat=' + lat + '&lng=' + lng,
-                    method:'get',
-                    success:function(data) {
-                */
+                 // 生产环境代码
+                 $.ajax({
+                 url:'/destory?sid=' + sid +'&lat=' + lat + '&lng=' + lng,
+                 method:'get',
+                 success:function(data) {
+                 */
                 // 演示数据
                 map.remove(marker);
                 data.body.mana--;
                 data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 你摧毁了敌军的防御塔')
                 profile.score++;
                 /*
-                    }
-                });
-                */
+                 }
+                 });
+
+                 */
             }
         });
         return marker;
@@ -487,7 +500,7 @@
     function draw_user(lat,lng,faction,id) {
         var marker = new AMap.Marker({
             //icon: "/user.png",
-            icon: faction == profile.faction ? 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png' : 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png',
+            icon: faction == profile.faction ? '/html/user_blue_20x20.png' : '/html/user_red_20x20.png',
             position: [lat, lng]
         });
         marker.faction = faction;
@@ -498,54 +511,55 @@
 
     function update(lat,lng) {
         /*
-        $.ajax({
-            url:'/status?sid='+sid+'&lat=' + lat + '&lng=' + lng,
-            method:'get',
-            success:function(data) {
-                if (data.head.code == 200) {
-        */
-                    profile.hp = data.body.hp;
-                    profile.mp = data.body.mana;
+         // 生产环境代码
+         $.ajax({
+         url:'/status?sid='+sid+'&lat=' + lat + '&lng=' + lng,
+         method:'get',
+         success:function(data) {
+         if (data.head.code == 200) {
+         */
+        profile.hp = data.body.hp;
+        profile.mp = data.body.mana;
 
-                    $('#hp .current').css('width', data.body.hp + '0%');
-                    $('#mp .current').css('width', data.body.mana + '0%');
-                    $('#score').html(profile.score);
+        $('#hp .current').css('width', data.body.hp + '0%');
+        $('#mp .current').css('width', data.body.mana + '0%');
+        $('#score').html(profile.score);
 
-                    /*
-                    // 生产环境代码
-                    clear_marker();
-
-                    for(var i in data.body.towers) {
-                        markers.towers.push(build_tower(data.body.towers[i].lat, data.body.towers[i].lng, data.body.towers[i].faction));
-                    }
-
-                    for(var i in data.body.users) {
-                        markers.users.push(build_tower(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction));
-                    }
-                    */
-
-                    // 演示用的模拟数据
-                    if (markers.towers.length == 0) {
-                        for(var i in data.body.towers) {
-                            markers.towers.push(build_tower(data.body.towers[i].lat, data.body.towers[i].lng, data.body.towers[i].faction));
-                        }
-
-                        for(var i in data.body.users) {
-                            markers.users.push(build_tower(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction));
-                        }
-                    }
-
-                    var html='<ul>';
-                    for (var i in data.body.msgs) {
-                        html+='<li>'+data.body.msgs[i]+'</li>'
-                    }
-                    html+='</ul>';
-                    $('#msg').html(html);
         /*
-                }
+         // 生产环境代码
+         clear_marker();
+
+         for(var i in data.body.towers) {
+         markers.towers.push(build_tower(data.body.towers[i].lat, data.body.towers[i].lng, data.body.towers[i].faction));
+         }
+
+         for(var i in data.body.users) {
+         markers.users.push(build_tower(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction));
+         }
+         */
+
+        // 演示用的模拟数据
+        if (markers.towers.length == 0) {
+            for(var i in data.body.towers) {
+                markers.towers.push(build_tower(data.body.towers[i].lat, data.body.towers[i].lng, data.body.towers[i].faction));
             }
-        });
-        */
+
+            for(var i in data.body.users) {
+                markers.users.push(build_tower(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction));
+            }
+        }
+
+        var html='<ul>';
+        for (var i in data.body.msgs) {
+            html+='<li>'+data.body.msgs[i]+'</li>'
+        }
+        html+='</ul>';
+        $('#msg').html(html);
+        /*
+         }
+         }
+         });
+         */
     }
 
     function clear_marker() {
@@ -562,9 +576,9 @@
     }
 
     /*
-        感谢您看完了我们的前端代码, 很遗憾这是一个完成度很低的项目, 由于技术方面和其他方面的一些问题, 我们的2个ios同学和3个android同学并
-        没有完成他们的工作, 但我们最后仍然决定要做完这个项目. 所以我们其中一个服务端(也就是我)开发了这个很简陋的web展示程序,另一个服务端
-        同学用golang去完成与uber的对接和对前端的数据支持.
+     感谢您看完了我们的前端代码, 很遗憾这是一个完成度很低的项目, 由于技术方面和其他方面的一些问题, 我们的2个ios同学和3个android同学并
+     没有完成他们的工作, 但我们最后仍然决定要做完这个项目. 所以我们其中一个服务端(也就是我)开发了这个很简陋的web展示程序,另一个服务端
+     同学用golang去完成与uber的对接和对前端的数据支持.
      */
 </script>
 </body>
