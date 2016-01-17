@@ -6,7 +6,7 @@
 
 uberwar是一款基于Uber行程和真实世界地理位置的塔防游戏, 当uber用户开始了一次新的行程, 就可以进入游戏加入战斗. 
 
-图片位
+![Uber War Screenshot](http://tripwar.laoyou.mobi/html/screenshot.png)
 
 第一次进入游戏, 用户会被分配到一个阵营, 与另一个阵营的玩家进行对抗, 在行程中部署防御塔来攻击敌方玩家来获得分数.
 
