@@ -7,9 +7,18 @@ import (
 )
 
 var sids = make([]string, 0)
-var users = make(map[string]*models.User)
-var sidCurrent = make(map[string]*uber.CurrentInfo)
+var users = make(map[string]*models.User)           //sid => user
+var sidCurrent = make(map[string]*uber.CurrentInfo) //sid => currentInfo
 var towers = make([]*models.Tower, 0)
+var msgs = make(map[string][]string) //sid => []msg string
+func getUser(userId string) (user *models.User, sid string) {
+	for sid, user = range users {
+		if user.Id == userId {
+			break
+		}
+	}
+	return
+}
 
 func init() {
 	users["test1"] = &models.User{

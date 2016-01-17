@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"github.com/dchest/uniuri"
+	"github.com/hulucat/conf"
 	"github.com/hulucat/utils"
 	"io/ioutil"
 	"math/rand"
@@ -35,7 +36,7 @@ func handleOauthRedirect(w http.ResponseWriter, r *http.Request) {
 	code := r.FormValue("code")
 	utils.Debugf("Oauth redirect, code: %s", code)
 	resp, err := http.PostForm("https://login.uber.com.cn/oauth/v2/token", url.Values{
-		"client_secret": {"4s8YCaHLt_Dns4LsLA_pVKg87xEF1dCb2BG-Va3P"},
+		"client_secret": {conf.Get("uber_client_secret")},
 		"client_id":     {"DV6gJE19BMU6LIh0jJYAvtFyel8rpCfe"},
 		"grant_type":    {"authorization_code"},
 		"redirect_uri":  {"https://tripwar.laoyou.mobi/oauth_redirect"},
@@ -92,7 +93,7 @@ func handleOauthRedirect(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}(sid)
-	http.Redirect(w, r, "http://tripwar.laoyou.mobi/html/game.html?sid="+sid, 302)
+	http.Redirect(w, r, "http://tripwar.laoyou.mobi/html/index.html?sid="+sid, 302)
 }
 
 func handleGetStatus(w http.ResponseWriter, r *http.Request) {
@@ -152,7 +153,6 @@ func handleBuild(w http.ResponseWriter, r *http.Request) {
 				Desc: "Mana < 1",
 			},
 		}
-
 	} else {
 		user.Mana -= 1
 		users[sid] = user
@@ -164,9 +164,10 @@ func handleBuild(w http.ResponseWriter, r *http.Request) {
 			},
 		}
 		tower := &models.Tower{
-			Id:  uniuri.NewLen(10),
-			Lat: lat,
-			Lng: lng,
+			Id:     uniuri.NewLen(10),
+			UserId: user.Id,
+			Lat:    lat,
+			Lng:    lng,
 		}
 		towers = append(towers, tower)
 		dict := map[string]interface{}{
