@@ -336,7 +336,6 @@
 
     // uber
     function login () {
-        //window.location.href = "https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=1Hs2YA8QcqTx8uWIg4Mt66iZe93e5gJ_&state=&scope=profile"
         var uri = "https://tripwar.laoyou.mobi/oauth_redirect";
         var scope = "profile history request all_trips";
         window.location.href="https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=DV6gJE19BMU6LIh0jJYAvtFyel8rpCfe&redirect_uri="+encodeURI(uri)+"&scope="+encodeURI(scope);
@@ -384,7 +383,7 @@
             if (mode == 'build' && profile.mp > 0) {
                 /*
                 $.ajax({
-                    url:'',
+                    url:'/',
                     method:'get',
                     success:function(){
                 */
@@ -417,8 +416,9 @@
     // 定位
     function loc () {
         map.panBy(0, 5);
-        update ();
+        update (0, 0);
         /*
+        // 这里是生产环境的定位, 但是由于展示的时候是静止不动的, 所以要换成数据模拟
         map.plugin('AMap.Geolocation', function() {
             geolocation = new AMap.Geolocation({
                 enableHighAccuracy: true,//是否使用高精度定位，默认:true
@@ -427,24 +427,14 @@
                 zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
                 buttonPosition:'RB'
             });
-            //map.addControl(geolocation);
             geolocation.getCurrentPosition();
             AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
             AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
         });
         //解析定位结果
         function onComplete(data) {
-            //var str=['定位成功'];
-            //str.push('经度：' + data.position.getLng());
-            //str.push('纬度：' + data.position.getLat());
-            //str.push('精度：' + data.accuracy + ' 米');
-            //str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-            //document.getElementById('tip').innerHTML = str.join('<br>');
-
-
-            //map.panTo(data.position);
-            //update ();
-
+            map.panTo(data.position);
+            update (data.position.getLat(), data.position.getLng());
         }
         //解析定位错误信息
         function onError(data) {
@@ -453,6 +443,15 @@
     }
 
     function build_tower(lat,lng,faction,id) {
+        /*
+        // 生产环境代码
+        $.ajax({
+            url: '/build?sid=' + sid + '&lat=' + lat + '&lng=' + lng,
+            method: 'get',
+            success: function (data) {
+            }
+        });
+        */
         var marker = new AMap.Marker({
             //icon: "/tower.png",
             icon: faction == profile.faction ? 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png' : 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png',
@@ -461,14 +460,17 @@
         marker.setMap(map);
         marker.faction = faction;
         marker.tower_id = id;
+
         AMap.event.addListener(marker, 'click', function(e){
             if (mode == 'destory' && profile.mp > 0 && profile.faction != marker.faction) {
                 /*
+                // 生产环境代码
                 $.ajax({
-                    url:'',
+                    url:'/destory?sid=' + sid +'&lat=' + lat + '&lng=' + lng,
                     method:'get',
                     success:function(data) {
                 */
+                // 演示数据
                 map.remove(marker);
                 data.body.mana--;
                 data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 你摧毁了敌军的防御塔')
@@ -494,16 +496,14 @@
         return marker;
     }
 
-    function update() {
-
+    function update(lat,lng) {
         /*
         $.ajax({
-            url:'',
+            url:'/status?sid='+sid+'&lat=' + lat + '&lng=' + lng,
             method:'get',
             success:function(data) {
                 if (data.head.code == 200) {
         */
-
                     profile.hp = data.body.hp;
                     profile.mp = data.body.mana;
 
@@ -512,6 +512,7 @@
                     $('#score').html(profile.score);
 
                     /*
+                    // 生产环境代码
                     clear_marker();
 
                     for(var i in data.body.towers) {
@@ -523,6 +524,7 @@
                     }
                     */
 
+                    // 演示用的模拟数据
                     if (markers.towers.length == 0) {
                         for(var i in data.body.towers) {
                             markers.towers.push(build_tower(data.body.towers[i].lat, data.body.towers[i].lng, data.body.towers[i].faction));
