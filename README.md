@@ -25,6 +25,13 @@ uberwar是一款基于Uber行程和真实世界地理位置的塔防游戏, 当u
 3. request/current 获取用户当前的行程信息和位置信息
 4. request 用来模拟用户行程
 
+## 相关链接
+
+* 演示地址 : [http://uberwar:8080/html/](http://uberwar:8080/html/)
+* Github : [https://github.com/m4ker/uberwar](https://github.com/m4ker/uberwar)
+* 设计文档 : [https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1](https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+* 接口文档 : [https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89](https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89)
+
 ## 演讲稿
 
 各位同学大家好, 我们给大家带来了一款游戏, 它起名字叫 优步战争, 优步战争是一款基于Uber行程和真实世界地理位置的塔防游戏, 当uber用户开始了一次新的行程, 就可以进入优步战争的世界加入战斗. 
