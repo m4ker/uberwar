@@ -10,7 +10,14 @@ func check() {
 	//检查爆炸
 	for sid, user := range users {
 		for _, tower := range towers {
+			if tower.Faction == user.Faction {
+				continue
+			}
 			if utils.GetEarthDistance(user.Lat, user.Lng, tower.Lat, tower.Lng) < 10 { //Boom!
+				cacheKey := fmt.Sprintf("boom_%s_%s", user.Id, tower.Id)
+				if utils.GetCache(cacheKey) != "" {
+					continue
+				}
 				utils.Debugf("Boom! user: %s, tower: %s", user.Name, tower.Id)
 				user.Hp -= 1
 				users[sid] = user
@@ -19,7 +26,7 @@ func check() {
 				owner.Score += 10
 				owner.TotalScore += 10
 				users[osid] = owner
-
+				utils.SetCache(cacheKey, "1", 86400)
 			}
 
 		}
