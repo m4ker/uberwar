@@ -14,7 +14,7 @@ func check() {
 				continue
 			}
 			if utils.GetEarthDistance(user.Lat, user.Lng, tower.Lat, tower.Lng) < 10 { //Boom!
-				cacheKey := fmt.Sprintf("boom_%s_%s", user.Id, tower.Id)
+				cacheKey := fmt.Sprintf("tripwar_boom_%s_%s", user.Id, tower.Id)
 				if utils.GetCache(cacheKey) != "" {
 					continue
 				}
@@ -26,7 +26,7 @@ func check() {
 				owner.Score += 10
 				owner.TotalScore += 10
 				users[osid] = owner
-				utils.SetCache(cacheKey, "1", 86400)
+				utils.SetCache(cacheKey, "1", 300)
 			}
 
 		}
@@ -38,7 +38,7 @@ func check() {
 				continue
 			}
 			if utils.GetEarthDistance(user.Lat, user.Lng, user2.Lat, user2.Lng) < 10 { //Papapa!
-				cacheKey := fmt.Sprintf("meets_%s_%s", user.Id, user2.Id)
+				cacheKey := fmt.Sprintf("tripwar_meets_%s_%s", user.Id, user2.Id)
 				if utils.GetCache(cacheKey) != "" {
 					continue
 				}
@@ -47,7 +47,7 @@ func check() {
 				user.Mana += 1
 				users[sid] = user
 				msgs[sid] = append(msgs[sid], "你遇到"+user2.Name+",获得1滴血和1魔法")
-				utils.SetCache(cacheKey, "1", 86400)
+				utils.SetCache(cacheKey, "1", 300)
 			}
 		}
 	}
