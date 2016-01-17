@@ -10,6 +10,7 @@ func check() {
 	for sid, user := range users {
 		for _, tower := range towers {
 			if utils.GetEarthDistance(user.Lat, user.Lng, tower.Lat, tower.Lng) < 10 { //Boom!
+				utils.Debugf("Boom! user: %s, tower: %s", user.Name, tower.Id)
 				user.Hp -= 1
 				users[sid] = user
 				msgs[sid] = append(msgs[sid], "你碰到地雷，被炸掉1滴血")
@@ -26,6 +27,7 @@ func check() {
 	for sid, user := range users {
 		for _, user2 := range users {
 			if utils.GetEarthDistance(user.Lat, user.Lng, user2.Lat, user2.Lng) < 10 { //Papapa!
+				utils.Debugf("Papapa! user: %s, meets: %s", user.Name, user2.Name)
 				user.Hp += 1
 				user.Mana += 1
 				users[sid] = user

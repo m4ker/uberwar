@@ -114,10 +114,7 @@ func handleGetStatus(w http.ResponseWriter, r *http.Request) {
 		"mana":       user.Mana,
 		"towers":     towers,
 		"users":      others,
-		"msgs": []string{
-			"hehe",
-			"haha",
-		},
+		"msgs":       msgs[sid],
 	}
 	msg := &Msg{
 		Head: MsgHead{
