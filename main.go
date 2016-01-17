@@ -12,6 +12,7 @@ import (
 func main() {
 	utils.Infof("TripWar start to run.")
 	go regTasks()
+	go handlers.Start()
 	s := &http.Server{
 		Addr:         ":9092",
 		Handler:      handlers.HttpRouter{},
