@@ -1,6 +1,6 @@
 # uberwar
 
-2016 Uber Hackthon Project
+2016 Uber Hackathon Project
 
 ## 简介
 
