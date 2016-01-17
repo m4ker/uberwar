@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/hulucat/utils"
 	"time"
 )
@@ -26,12 +27,20 @@ func check() {
 	//检查相遇
 	for sid, user := range users {
 		for _, user2 := range users {
+			if user.Id == user2.Id {
+				continue
+			}
 			if utils.GetEarthDistance(user.Lat, user.Lng, user2.Lat, user2.Lng) < 10 { //Papapa!
+				cacheKey := fmt.Sprintf("meets_%s_%s", user.Id, user2.Id)
+				if utils.GetCache(cacheKey) != "" {
+					continue
+				}
 				utils.Debugf("Papapa! user: %s, meets: %s", user.Name, user2.Name)
 				user.Hp += 1
 				user.Mana += 1
 				users[sid] = user
 				msgs[sid] = append(msgs[sid], "你遇到"+user2.Name+",获得1滴血和1魔法")
+				utils.SetCache(cacheKey, "1", 86400)
 			}
 		}
 	}
