@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>Uber War</title>
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon.png">
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <script src="http://webapi.amap.com/maps?v=1.3&key=f4584507f21f1482f3ccd0e3013b0823"></script>
     <!--
@@ -153,7 +155,7 @@
                 </div>
                 <div style="overflow:hidden;">
                     <div style="overflow:hidden;float:left;width:40%;">
-                        <div id="level">Lv4</div>
+                        <div id="level">Lv2</div>
                         <div id="username">m4ker</div>
                     </div>
 
@@ -201,6 +203,7 @@
     var profile = {
         faction:1,
         hp:8,
+        score:40,
         mp:6
     };
     var markers = {
@@ -224,51 +227,57 @@
             "towers": [
                 {
                     "id": 1,
-                    "faction": 1,
-                    "lat": 116.40697,
-                    "lng": 39.905047
+                    "faction": 2,
+                    "lat": 116.305952,
+                    "lng": 39.980106
                 },
                 {
                     "id": 2,
-                    "faction": 2,
-                    "lat": 116.406696,
-                    "lng": 39.903886
+                    "faction": 1,
+                    "lat": 116.30607,
+                    "lng": 39.978955
                 },
                 {
                     "id": 3,
-                    "faction": 1,
-                    "lat": 116.40918,
-                    "lng": 39.904561
+                    "faction": 2,
+                    "lat": 116.308141,
+                    "lng": 39.979045
                 },
                 {
                     "id": 4,
-                    "faction": 2,
-                    "lat": 116.409947,
-                    "lng": 39.904565
+                    "faction": 1,
+                    "lat": 116.306821,
+                    "lng": 39.979054
                 },
                 {
                     "id": 5,
-                    "faction": 1,
-                    "lat": 116.409046,
-                    "lng": 39.905479
+                    "faction": 2,
+                    "lat": 116.308141,
+                    "lng": 39.979045
                 },
                 {
                     "id": 6,
-                    "faction": 2,
-                    "lat": 116.410033,
-                    "lng": 39.904528
+                    "faction": 1,
+                    "lat": 116.308409,
+                    "lng": 39.978988
                 },
                 {
                     "id": 7,
-                    "faction": 1,
-                    "lat": 116.409963,
-                    "lng": 39.904664
+                    "faction": 2,
+                    "lat": 116.30843,
+                    "lng": 39.980155
                 },
                 {
                     "id": 8,
-                    "faction": 2,
-                    "lat": 116.403564,
-                    "lng": 39.903775
+                    "faction": 1,
+                    "lat": 116.309536,
+                    "lng": 39.980139
+                },
+                {
+                    id:8,
+                    faction:2,
+                    lat:116.30592,
+                    lng:39.980114
                 }
             ],
             "users": [
@@ -284,30 +293,35 @@
                 },
             ],
             "msgs": [
-                "[1/17 12:23:00] 你的防御塔1503攻击了敌军",
-                "[1/17 12:10:00] 防御塔1505部署成功",
-                "[1/17 12:10:00] 你的防御塔被敌军拆除",
-                "[1/16 23:55:00] 你的防御塔1503攻击了敌军",
-                "[1/16 23:22:00] 防御塔1505部署成功",
-                "[1/16 23:10:00] 你的防御塔被敌军拆除",
-                "[1/16 22:55:00] 你的防御塔1503攻击了敌军",
-                "[1/16 22:22:00] 防御塔1505部署成功",
-                "[1/16 22:10:00] 你的防御塔被敌军拆除",
-                "[1/16 21:55:00] 你的防御塔1503攻击了敌军",
-                "[1/16 21:22:00] 防御塔1505部署成功",
-                "[1/16 21:10:00] 你的防御塔被敌军拆除",
-                "[1/16 21:55:00] 你的防御塔1503攻击了敌军",
-                "[1/16 21:22:00] 防御塔1505部署成功",
-                "[1/16 21:10:00] 你的防御塔被敌军拆除",
+                "[01/17 12:23:00] 你的防御塔1503攻击了敌军",
+                "[01/17 12:10:00] 防御塔1505部署成功",
+                "[01/17 12:10:00] 你的防御塔被敌军拆除",
+                "[01/16 23:55:00] 你的防御塔1503攻击了敌军",
+                "[01/16 23:22:00] 防御塔1505部署成功",
+                "[01/16 23:10:00] 你的防御塔被敌军拆除",
+                "[01/16 22:55:00] 你的防御塔1503攻击了敌军",
+                "[01/16 22:22:00] 防御塔1505部署成功",
+                "[01/16 22:10:00] 你的防御塔被敌军拆除",
+                "[01/16 21:55:00] 你的防御塔1503攻击了敌军",
+                "[01/16 21:22:00] 防御塔1505部署成功",
+                "[01/16 21:10:00] 你的防御塔被敌军拆除",
+                "[01/16 21:55:00] 你的防御塔1503攻击了敌军",
+                "[01/16 21:22:00] 防御塔1505部署成功",
+                "[01/16 21:10:00] 你的防御塔被敌军拆除",
             ]
         }
     };
 
     $(function(){
         // 进入游戏
-        $('#go').click(function(e){
-            login();
-        })
+        if (params('sid')) {
+            init(params('sid'));
+        } else {
+            $('#go').click(function (e) {
+                login();
+            })
+        }
+
         // 建造防御塔
         $('#build').click(function(){
             if (mode == 'build') {
@@ -337,10 +351,27 @@
     });
 
     function login () {
-        init();
+        //window.location.href = "https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=1Hs2YA8QcqTx8uWIg4Mt66iZe93e5gJ_&state=&scope=profile"
+        var uri = "https://tripwar.laoyou.mobi/oauth_redirect";
+        var scope = "profile history request all_trips";
+        window.location.href="https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=DV6gJE19BMU6LIh0jJYAvtFyel8rpCfe&redirect_uri="+encodeURI(uri)+"&scope="+encodeURI(scope);
     }
 
-    function init () {
+    function params(name){
+        var uri = location.search;
+        var obj = {};
+        var string_array = [];
+        var string_array = uri.replace('?','').split("&");
+        for(var i =0;i<string_array.length; i++){
+            obj[ string_array[i].split('=')[0] ] = string_array[i].split('=')[1] || '';
+        }
+        return obj[name];
+    }
+
+
+    function init (id) {
+        sid=id;
+
         $('#start').hide();
         $('#game').show();
 
@@ -349,7 +380,7 @@
             dragEnable: false,
             keyboardEnable: false,
             doubleClickZoom: false,
-            center: [116.406986,39.904456],
+            center: [116.305995,39.979004],
             zoom: 30
         });
 
@@ -380,6 +411,7 @@
                 build_tower(e.lnglat.getLng(), e.lnglat.getLat(), profile.faction);
                 data.body.mana--; // test
                 data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 防御塔部署成功')
+                profile.score++;
                 /*
                     }
                 });
@@ -394,13 +426,14 @@
         setTimeout(function(){ // test
             data.body.hp --;
             data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 你被敌军的防御塔攻击')
-        }, 100000);
+            //profile.score--;
+        }, 50000);
 
         loc();
     }
 
     function loc () {
-        map.panBy(-5, 0);
+        map.panBy(0, 5);
         update ();
         /*
         map.plugin('AMap.Geolocation', function() {
@@ -455,6 +488,8 @@
                 */
                 map.remove(marker);
                 data.body.mana--;
+                data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 你摧毁了敌军的防御塔')
+                profile.score++;
                 /*
                     }
                 });
@@ -491,6 +526,7 @@
 
                     $('#hp .current').css('width', data.body.hp + '0%');
                     $('#mp .current').css('width', data.body.mana + '0%');
+                    $('#score').html(profile.score);
 
                     /*
                     clear_marker();
