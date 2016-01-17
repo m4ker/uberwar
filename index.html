@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>Uber War</title>
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon.png">
-    <link rel="icon" type="image/png" sizes="120x120"  href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/html/favicon.png">
+    <link rel="icon" type="image/png" sizes="120x120"  href="/html/favicon.png">
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+
     <script src="http://webapi.amap.com/maps?v=1.3&key=f4584507f21f1482f3ccd0e3013b0823"></script>
-    <!--
-    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-    -->
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="moment.js"></script>
     <style>
@@ -54,7 +54,6 @@
         #hp {
             width:100%;
             height:20px;
-            /*border: #fff solid 2px;*/
             background:#fff;
         }
         #hp .current{
@@ -63,9 +62,7 @@
             background:red;
         }
         #mp {
-            /*width:100%;*/
             height:20px;
-            /*border: #fff solid 2px;*/
             background:#fff;
             margin-top: 10px;
         }
@@ -106,27 +103,33 @@
             height:20%;
             overflow-x:scroll;
         }
+        #msg ul{
+            padding-left:5px;
+        }
+        #msg ul li{
+            list-style: none;
+        }
         #action{
             position:absolute;
-            top:150px;
+            top:200px;
             right:0;
             z-index: 100;
-            width:100px;
-            height:200px;
+            width:50px;
+            height:100px;
             font-size:2em;
             /*background:orange;*/
         }
         #action a {
             display:block;
-            width:100px;
-            height:100px;
+            width:50px;
+            height:50px;
         }
         #action a.active {
             color:red;
             font-weight:bold;
         }
         #me {
-            background: red;
+            background: blue;
             width:10px;
             height:10px;
             position: absolute;
@@ -165,7 +168,7 @@
             </div>
             <div style="width:50%;float:right;text-align:right;color:orange;">
                 <div style="font-size:1.5em;">
-                    Score: <span id="score">1234567</span>
+                    Score: <span id="score"></span>
                 </div>
             </div>
         </div>
@@ -173,27 +176,10 @@
     <div id="container"></div>
     <div id="tip"></div>
     <div id="me"></div>
-    <div id="msg">
-        <ul>
-            <li>[1/17 12:23:00] 你的防御塔1503攻击了敌军</li>
-            <li>[1/17 12:10:00] 防御塔1505部署成功</li>
-            <li>[1/17 12:10:00] 你的防御塔被敌军拆除</li>
-            <li>[1/17 12:23:00] 你的防御塔1503攻击了敌军</li>
-            <li>[1/17 12:10:00] 防御塔1505部署成功</li>
-            <li>[1/17 12:10:00] 你的防御塔被敌军拆除</li>
-            <li>[1/17 12:23:00] 你的防御塔1503攻击了敌军</li>
-            <li>[1/17 12:10:00] 防御塔1505部署成功</li>
-            <li>[1/17 12:10:00] 你的防御塔被敌军拆除</li>
-            <li>[1/17 12:10:00] 防御塔1505部署成功</li>
-            <li>[1/17 12:10:00] 你的防御塔被敌军拆除</li>
-            <li>[1/17 12:23:00] 你的防御塔1503攻击了敌军</li>
-            <li>[1/17 12:10:00] 防御塔1505部署成功</li>
-            <li>[1/17 12:10:00] 你的防御塔被敌军拆除</li>
-        </ul>
-    </div>
+    <div id="msg"></div>
     <div id="action">
         <a href="javascript:void(0);" id="build">建</a>
-        <a href="javascript:void(0);" id="destory">拆</a>
+        <a href="javascript:void(0);" id="destory">炸</a>
     </div>
 </div>
 <script>
@@ -212,8 +198,7 @@
     var timer;
     var mode = null;
 
-
-    var log = [];
+    // 演示用的模拟数据
     var data = {
         "head": {
             "code": 200,
@@ -226,51 +211,51 @@
             "towers": [
                 {
                     "id": 1,
-                    "faction": 2,
+                    "faction": 1,
                     "lat": 116.305952,
                     "lng": 39.980106
                 },
                 {
                     "id": 2,
                     "faction": 1,
-                    "lat": 116.30607,
-                    "lng": 39.978955
+                    "lat": 116.306038,
+                    "lng": 39.979138
                 },
                 {
                     "id": 3,
-                    "faction": 2,
-                    "lat": 116.308141,
-                    "lng": 39.979045
+                    "faction": 1,
+                    "lat": 116.306022,
+                    "lng": 39.979216
                 },
                 {
                     "id": 4,
                     "faction": 1,
-                    "lat": 116.306821,
-                    "lng": 39.979054
+                    "lat": 116.306027,
+                    "lng": 39.979282
                 },
                 {
                     "id": 5,
                     "faction": 2,
-                    "lat": 116.308141,
-                    "lng": 39.979045
+                    "lat": 116.306033,
+                    "lng": 39.979364
                 },
                 {
                     "id": 6,
-                    "faction": 1,
-                    "lat": 116.308409,
-                    "lng": 39.978988
+                    "faction": 2,
+                    "lat": 116.305925,
+                    "lng": 39.979417
                 },
                 {
                     "id": 7,
                     "faction": 2,
-                    "lat": 116.30843,
-                    "lng": 39.980155
+                    "lat": 116.306279,
+                    "lng": 39.978975
                 },
                 {
                     "id": 8,
                     "faction": 1,
-                    "lat": 116.309536,
-                    "lng": 39.980139
+                    "lat": 116.305974,
+                    "lng": 39.978795
                 },
                 {
                     id:8,
@@ -349,6 +334,7 @@
 
     });
 
+    // uber
     function login () {
         //window.location.href = "https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=1Hs2YA8QcqTx8uWIg4Mt66iZe93e5gJ_&state=&scope=profile"
         var uri = "https://tripwar.laoyou.mobi/oauth_redirect";
@@ -356,6 +342,7 @@
         window.location.href="https://login.uber.com.cn/oauth/v2/authorize?response_type=code&client_id=DV6gJE19BMU6LIh0jJYAvtFyel8rpCfe&redirect_uri="+encodeURI(uri)+"&scope="+encodeURI(scope);
     }
 
+    // query
     function params(name){
         var uri = location.search;
         var obj = {};
@@ -367,7 +354,7 @@
         return obj[name];
     }
 
-
+    // 初始化地图
     function init (id) {
         sid=id;
 
@@ -379,26 +366,21 @@
             dragEnable: false,
             keyboardEnable: false,
             doubleClickZoom: false,
-            center: [116.305995,39.979004],
+            center: [116.305995,39.979004], // 这是一个演示用的模拟初始坐标
             zoom: 30
         });
 
         map.setMapStyle('blue_night');
         map.setFeatures(["road", "building"]);
 
-
         if (document.createElement('canvas') && document.createElement('canvas').getContext && document.createElement('canvas').getContext('2d')) {
-            // 实例化3D楼块图层
+            // 初始化3d地图,但是在移动端并没有生效
             var buildings = new AMap.Buildings();
-            // 在map中添加3D楼块图层
             buildings.setMap(map);
-        } else {
-            document.getElementById('tip').innerHTML = "对不起，运行该示例需要浏览器支持HTML5！";
         }
 
         map.on('click', function(e) {
             console.log(+e.lnglat.getLng()+','+e.lnglat.getLat());
-            //console.log(mode == 'build' , profile.mp );
             if (mode == 'build' && profile.mp > 0) {
                 /*
                 $.ajax({
@@ -406,7 +388,6 @@
                     method:'get',
                     success:function(){
                 */
-                //console.log(e.lnglat.getLng(), e.lnglat.getLat(), profile.faction);
                 build_tower(e.lnglat.getLng(), e.lnglat.getLat(), profile.faction);
                 data.body.mana--; // test
                 data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 防御塔部署成功')
@@ -418,19 +399,22 @@
             }
         });
 
+        loc();
+
+        // 模式定位
         timer = setInterval(function(){
             loc();
         }, 1000);
 
+        // 模拟事件
         setTimeout(function(){ // test
             data.body.hp --;
             data.body.msgs.splice(0, 0, '['+  moment().format('MM/DD HH:mm:ss')+'] 你被敌军的防御塔攻击')
             //profile.score--;
-        }, 50000);
-
-        loc();
+        }, 35000);
     }
 
+    // 定位
     function loc () {
         map.panBy(0, 5);
         update ();
@@ -562,14 +546,6 @@
         */
     }
 
-    function gameover() {
-
-    }
-
-    function connect() {
-
-    }
-
     function clear_marker() {
         for(i in markers.towers) {
             markers.towers[i].setMap(null);
@@ -583,6 +559,11 @@
         };
     }
 
+    /*
+        感谢您看完了我们的前端代码, 很遗憾这是一个完成度很低的项目, 由于技术方面和其他方面的一些问题, 我们的2个ios同学和3个android同学并
+        没有完成他们的工作, 但我们最后仍然决定要做完这个项目. 所以我们其中一个服务端(也就是我)开发了这个很简陋的web展示程序,另一个服务端
+        同学用golang去完成与uber的对接和对前端的数据支持.
+     */
 </script>
 </body>
 </html>
