@@ -21,6 +21,7 @@ func main() {
 	s.ListenAndServe()
 }
 
+//timer
 func regTasks() {
 	timer := time.NewTicker(5 * time.Second)
 	for {
