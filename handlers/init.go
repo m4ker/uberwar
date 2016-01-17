@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"math/rand"
 	"tripwar/models"
 	"tripwar/uber"
 )
