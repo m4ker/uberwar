@@ -284,8 +284,18 @@
                     "total_score": 129292,
                     "score": 112,
                     "location_bearing": 33,
-                    "lat": 45.22,
-                    "lng": 106.11,
+                    "lat": 116.306175,
+                    "lng": 39.979074
+                },//116.305933,39.97921
+                {
+                    "id": 12343,
+                    "faction": 2,
+                    "name": "Jack",
+                    "total_score": 129292,
+                    "score": 112,
+                    "location_bearing": 33,
+                    "lat": 116.305933,
+                    "lng": 39.97921
                 },
             ],
             "msgs": [
@@ -498,6 +508,7 @@
     }
 
     function draw_user(lat,lng,faction,id) {
+        console.log('hello',lat,lng,faction,id)
         var marker = new AMap.Marker({
             //icon: "/user.png",
             icon: faction == profile.faction ? '/html/user_blue_20x20.png' : '/html/user_red_20x20.png',
@@ -545,7 +556,7 @@
             }
 
             for(var i in data.body.users) {
-                markers.users.push(build_tower(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction));
+                markers.users.push(draw_user(data.body.users[i].lat, data.body.users[i].lng, data.body.users[i].faction, 0));
             }
         }
 
