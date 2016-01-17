@@ -135,7 +135,7 @@ func handleInit(w http.ResponseWriter, r *http.Request) {
 			Code: 200,
 			Desc: "OK",
 		},
-		Body: "12345",
+		Body: "http://tripwar.laoyou.mobi/html/index.html",
 	}
 	bytes, _ := json.Marshal(msg)
 	w.Write(bytes)
