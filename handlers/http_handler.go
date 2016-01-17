@@ -114,10 +114,7 @@ func handleGetStatus(w http.ResponseWriter, r *http.Request) {
 		"mana":       user.Mana,
 		"towers":     towers,
 		"users":      others,
-		"msgs": []string{
-			"hehe",
-			"haha",
-		},
+		"msgs":       msgs[sid],
 	}
 	msg := &Msg{
 		Head: MsgHead{
@@ -164,10 +161,11 @@ func handleBuild(w http.ResponseWriter, r *http.Request) {
 			},
 		}
 		tower := &models.Tower{
-			Id:     uniuri.NewLen(10),
-			UserId: user.Id,
-			Lat:    lat,
-			Lng:    lng,
+			Id:      uniuri.NewLen(10),
+			UserId:  user.Id,
+			Faction: user.Faction,
+			Lat:     lat,
+			Lng:     lng,
 		}
 		towers = append(towers, tower)
 		dict := map[string]interface{}{

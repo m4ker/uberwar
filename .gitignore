@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 /node_modules
 Homestead.yaml
 Homestead.json
 .env.conf
-=======
 .DS_Store
->>>>>>> origin/master
+tripwar

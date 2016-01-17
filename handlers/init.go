@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"math/rand"
 	"tripwar/models"
 	"tripwar/uber"
 )
@@ -25,7 +24,7 @@ func init() {
 		Id:              "test1",
 		Name:            "Ji weicai",
 		UberOpenId:      "test1",
-		Faction:         int64(rand.Intn(2)),
+		Faction:         1,
 		TotalScore:      10000,
 		Score:           0,
 		Mana:            6,
@@ -38,7 +37,7 @@ func init() {
 		Id:              "test2",
 		Name:            "Gan lanjie",
 		UberOpenId:      "test2",
-		Faction:         int64(rand.Intn(2)),
+		Faction:         2,
 		TotalScore:      10000,
 		Score:           0,
 		Mana:            6,
@@ -51,7 +50,7 @@ func init() {
 		Id:              "test3",
 		Name:            "Niu pengch",
 		UberOpenId:      "test3",
-		Faction:         int64(rand.Intn(2)),
+		Faction:         1,
 		TotalScore:      10000,
 		Score:           0,
 		Mana:            6,
