@@ -27,7 +27,7 @@ uberwar是一款基于Uber行程和真实世界地理位置的塔防游戏, 当u
 
 ## 相关链接
 
-* 演示地址 : [http://uberwar:8080/html/](http://uberwar:8080/html/)
+* 演示地址 : [http://tripwar.laoyou.mobi/html/](http://tripwar.laoyou.mobi/html/)
 * Github : [https://github.com/m4ker/uberwar](https://github.com/m4ker/uberwar)
 * 设计文档 : [https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1](https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
 * 接口文档 : [https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89](https://github.com/m4ker/uberwar/wiki/%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89)
